@@ -2,10 +2,10 @@ from exceptions import UnitDied
 
 
 class Unit:
-    def __init__(self, hp, got_key, coord):
+    def __init__(self, hp, x, y):
         self.hp = hp
-        self.got_key = got_key
-        self.coord = coord
+        self.got_key = False
+        self.coord = (x, y)
         self.escaped = False
 
     def has_key(self):
@@ -19,6 +19,7 @@ class Unit:
 
     def is_alive(self):
         if self.hp <= 0:
+            print("Конец игры")
             return UnitDied
         return True
 
@@ -32,14 +33,11 @@ class Unit:
     def get_coordinates(self):
         return self.coord
 
-
-"""
-    def has_position(self):
-        return self.??   
-"""
+    def has_position(self, x, y):
+        return self.coord[0] == x and self.coord[1] == y
 
 
 class Ghost(Unit):
-    def __init__(self, hp, coord):
-        super().__init__(hp, coord)
+    def __init__(self, hp, x, y):
+        super().__init__(hp, x, y)
         self.name = "Ghost"
