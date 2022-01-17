@@ -1,6 +1,3 @@
-from exceptions import UnitDied
-
-
 class Unit:
     def __init__(self, hp, x, y):
         self.hp = hp
@@ -20,7 +17,7 @@ class Unit:
     def is_alive(self):
         if self.hp <= 0:
             print("Конец игры")
-            return UnitDied
+            return False
         return True
 
     def get_damage(self, damage):

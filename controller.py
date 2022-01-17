@@ -58,7 +58,7 @@ class GameController:
 
     def play(self):
         self.make_field()
-        while self.game_on:  #and self.hero.has_escaped is False:
+        while self.game_on and not self.hero.has_escaped() and self.hero.is_alive():
 
             self._draw_field()
             command = input().lower()
@@ -76,4 +76,5 @@ class GameController:
                 self.game_on = False
             else:
                 print("Введи другую команду")
+
 

@@ -22,8 +22,9 @@ class Door(Terrain):
         super().__init__(walkable=True, terrain="Door")
 
     def step_on(self, unit):
-        if self.unit.set_key is True:
-            self.unit.escaped = True
+        if unit.has_key() is True:
+            unit.escaped = True
+            return True
 
 
 class Key(Terrain):
@@ -31,7 +32,7 @@ class Key(Terrain):
         super().__init__(walkable=True, terrain="Key")
 
     def step_on(self, unit: Unit):
-        return self.unit.set_key()
+        return unit.set_key()
 
 
 class Trap(Terrain):
@@ -40,7 +41,7 @@ class Trap(Terrain):
         self.damage = damage
 
     def step_on(self,  unit: Unit):
-        self.unit.get_damage(self.damage)
+        unit.get_damage(self.damage)
 
 
 class Grass(Terrain):

@@ -21,11 +21,11 @@ class Field:
 
     def unit_move(self, x, y):
         if self.cell(x, y).get_obj().get_terrain() == 'Key':
-            self.unit.set_key()
+            self.cell(x, y).get_obj().step_on(self.unit)
             print('Теперь у Вас есть ключ')
 
         if self.cell(x, y).get_obj().get_terrain() == 'Trap':
-            self.unit.get_damage(10)
+            self.cell(x, y).get_obj().step_on(self.unit)
             print(f'Ловушка! Осталось {self.unit.hp} хит-поинтов')
 
         if self.cell(x, y).get_obj().is_walkable():
@@ -34,8 +34,10 @@ class Field:
             print('Нельзя перемещаться на эту ячейку')
 
         if self.cell(x, y).get_obj().get_terrain() == 'Door':
-            #self.cell(x, y).get_obj().get_terrain().step_on(self.unit)
-            print('Уровень пройден!')
+            if self.cell(x, y).get_obj().step_on(self.unit):
+                print('Уровень пройден!')
+            else:
+                print('Чтобы выйти из подземелья нужен ключ!')
 
     def move_unit_up(self):
         x, y = self.unit.get_coordinates()
